@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Speed Master - CS CodeLab</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <div class="logo">
+            <i class="fas fa-robot"></i>
+            <h1>Typing Speed Master</h1>
+            <span class="ai-badge">CS CodeLab</span>
+          </div>
+          <div class="header-controls">
+            <button class="theme-toggle" id="theme-toggle">
+              <i class="fas fa-moon"></i>
+            </button>
+            <button class="stats-btn" id="stats-btn">
+              <i class="fas fa-chart-bar"></i> Stats
+            </button>
+          </div>
+        </div>
+      </header>
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Game Setup -->
+        <section class="game-setup" id="game-setup">
+          <div class="setup-container">
+            <h2>Configure Your Typing Challenge</h2>
+            <!-- Level Selection -->
+            <div class="control-group">
+              <label>Difficulty Level</label>
+              <div class="level-buttons">
+                <button class="level-btn active" data-level="easy">
+                  <i class="fas fa-seedling"></i> <span>Easy</span>
+                  <small>Simple words & sentences</small>
+                </button>
+                <button class="level-btn" data-level="medium">
+                  <i class="fas fa-fire"></i> <span>Medium</span>
+                  <small>Complex paragraphs</small>
+                </button>
+                <button class="level-btn" data-level="advanced">
+                  <i class="fas fa-rocket"></i> <span>Advanced</span>
+                  <small>Technical & challenging</small>
+                </button>
+              </div>
+            </div>
+            <!-- Timer Selection -->
+            <div class="control-group">
+              <label>Test Duration</label>
+              <div class="timer-selection">
+                <button class="timer-btn" data-time="60">1 min</button>
+                <button class="timer-btn active" data-time="120">2 min</button>
+                <button class="timer-btn" data-time="180">3 min</button>
+                <button class="timer-btn" data-time="240">4 min</button>
+                <button class="timer-btn" data-time="300">5 min</button>
+                <button class="timer-btn" data-time="360">6 min</button>
+              </div>
+            </div>
+            <!-- Start Button -->
+            <button class="start-btn" id="start-btn">
+              <i class="fas fa-play"></i> Start Typing Challenge
+            </button>
+          </div>
+        </section>
+        <!-- Game Area -->
+        <section class="game-area hidden" id="game-area">
+          <!-- Stats Display -->
+          <div class="stats-display">
+            <div class="stat-item">
+              <span class="stat-label">WPM</span>
+              <span class="stat-value" id="wpm">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">CPM</span>
+              <span class="stat-value" id="cpm">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Accuracy</span>
+              <span class="stat-value" id="accuracy">100%</span>
+            </div>
+            <div class="stat-item timer">
+              <span class="stat-label">Time</span>
+              <span class="stat-value" id="timer">2:00</span>
+            </div>
+          </div>
+          <!-- Text Display -->
+          <div class="text-display" id="text-display">
+            <div class="text-content" id="text-content"></div>
+          </div>
+          <!-- Input Area -->
+          <div class="input-area">
+            <textarea
+              id="typing-input"
+              placeholder="Start typing here..."
+              disabled
+            ></textarea>
+            <div class="input-controls">
+              <button class="control-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> Restart
+              </button>
+              <button class="control-btn" id="change-level-btn">
+                <i class="fas fa-cog"></i> Change Level
+              </button>
+            </div>
+          </div>
+        </section>
+        <!-- Results -->
+        <section class="results hidden" id="results">
+          <div class="results-container">
+            <div class="results-header">
+              <i class="fas fa-trophy"></i>
+              <h2>Challenge Complete!</h2>
+              <div class="achievement-badge" id="achievement-badge"></div>
+            </div>
+            <div class="results-grid">
+              <div class="result-card">
+                <h3>Your Score</h3>
+                <div class="score-details">
+                  <div class="score-item">
+                    <span>WPM</span> <span id="final-wpm">0</span>
+                  </div>
+                  <div class="score-item">
+                    <span>CPM</span> <span id="final-cpm">0</span>
+                  </div>
+                  <div class="score-item">
+                    <span>Accuracy</span> <span id="final-accuracy">0%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="result-card">
+                <h3>Best Scores</h3>
+                <div class="score-details">
+                  <div class="score-item">
+                    <span>Personal Best</span>
+                    <span id="personal-best">0 WPM</span>
+                  </div>
+                  <div class="score-item">
+                    <span>Level Record</span>
+                    <span id="level-record">0 WPM</span>
+                  </div>
+                  <div class="score-item">
+                    <span>All-Time High</span>
+                    <span id="all-time-high">0 WPM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="motivational-quote" id="motivational-quote">
+              "The expert in anything was once a beginner."
+            </div>
+            <div class="results-actions">
+              <button class="action-btn primary" id="try-again-btn">
+                <i class="fas fa-redo"></i> Try Again
+              </button>
+              <button class="action-btn secondary" id="new-challenge-btn">
+                <i class="fas fa-plus"></i> New Challenge
+              </button>
+              <button class="action-btn secondary" id="view-stats-btn">
+                <i class="fas fa-chart-line"></i> View All Stats
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <p>
+            Made with <i class="fas fa-heart"></i> by
+            <strong>Abdul Raheem</strong>
+          </p>
+          <div class="footer-links">
+            <span>Typing Speed Master CS CodeLab</span> <span>•</span>
+            <span>© 2025</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Stats Modal -->
+    <div class="modal hidden" id="stats-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Your Typing Statistics</h2>
+          <button class="close-btn" id="close-stats">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="stats-grid" id="stats-grid">
+            <!-- Stats will be populated here -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
